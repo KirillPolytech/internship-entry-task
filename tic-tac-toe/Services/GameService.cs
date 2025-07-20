@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using tic_tac_toe.Configuration;
+using tic_tac_toe.Interfaces;
 using tic_tac_toe.Models;
 
 namespace tic_tac_toe.Services
@@ -8,17 +9,22 @@ namespace tic_tac_toe.Services
     {
         private readonly Random _random = new();
         private readonly GameSettings _settings;
+        private readonly IGameRepository _gameRepository;
+        private readonly double _errorChance = 0.1d;
 
-        public GameService(IOptions<GameSettings> settings)
+        public GameService(IOptions<GameSettings> settings, IGameRepository gameRepository)
         {
             _settings = settings.Value;
+            _gameRepository = gameRepository;
         }
 
         private PlayerType GetOpponent(PlayerType player) => player == PlayerType.X ? PlayerType.O : PlayerType.X;
 
         public GameData CreateGame()
         {
-            return new GameData(_settings.FieldSize, _settings.WinCondition);
+            GameData game = new GameData(_settings.FieldSize, _settings.WinCondition);
+            _gameRepository.Save(game);
+            return game;
         }
 
         public bool MakeMove(GameData game, int row, int col)
@@ -34,12 +40,11 @@ namespace tic_tac_toe.Services
 
             game.MoveCount++;
 
-            // Проверяем правило для каждого третьего хода
             PlayerType symbolToPlace = game.CurrentPlayer;
             if (game.MoveCount % 3 == 0)
             {
                 var chance = _random.NextDouble();
-                if (chance <= 0.10) // 10%
+                if (chance <= _errorChance)
                 {
                     symbolToPlace = GetOpponent(game.CurrentPlayer);
                 }
@@ -47,7 +52,6 @@ namespace tic_tac_toe.Services
 
             game.Board[row][col] = symbolToPlace;
 
-            // Проверяем победу
             if (CheckWin(game, row, col, symbolToPlace))
             {
                 game.Status = GameStatus.Won;
@@ -59,60 +63,67 @@ namespace tic_tac_toe.Services
             }
             else
             {
-                // Если ход сделан символом текущего игрока, меняем игрока
                 if (symbolToPlace == game.CurrentPlayer)
                     game.CurrentPlayer = GetOpponent(game.CurrentPlayer);
             }
+
+            _gameRepository.Save(game);
 
             return true;
         }
 
         private bool CheckWin(GameData game, int row, int col, PlayerType player)
         {
+            bool result =
+                CheckDirection(game, 0, 1, player, row, col)
+                || CheckDirection(game, 1, 0, player, row, col)
+                || CheckDirection(game, 1, 1, player, row, col)
+                || CheckDirection(game, 1, -1, player, row, col);
+
+            _gameRepository.Save(game);
+
+            return result;
+        }
+
+        public GameData GetGame(string id)
+        {
+            return _gameRepository.Get(id);
+        }
+
+        private bool CheckDirection(GameData game, int dr, int dc, PlayerType player, int row, int col)
+        {
             int inRow = game.WinCondition;
             int n = game.FieldSize;
 
-            // Проверяем в 4 направлениях: горизонталь, вертикаль, диагональ \, диагональ /
+            int count = 1;
 
-            bool CheckDirection(int dr, int dc)
+            for (int i = 1; i < inRow; i++)
             {
-                int count = 1;
-
-                // В одну сторону
-                for (int i = 1; i < inRow; i++)
-                {
-                    int r = row + dr * i;
-                    int c = col + dc * i;
-                    if (r < 0 || r >= n || c < 0 || c >= n) 
-                        break;
-                    if (game.Board[r][c] == player) 
-                        count++;
-                    else 
-                        break;
-                }
-
-                // В другую сторону
-                for (int i = 1; i < inRow; i++)
-                {
-                    int r = row - dr * i;
-                    int c = col - dc * i;
-
-                    if (r < 0 || r >= n || c < 0 || c >= n) 
-                        break;
-
-                    if (game.Board[r][c] == player) 
-                        count++;
-                    else 
-                        break;
-                }
-
-                return count >= inRow;
+                int r = row + dr * i;
+                int c = col + dc * i;
+                if (r < 0 || r >= n || c < 0 || c >= n)
+                    break;
+                if (game.Board[r][c] == player)
+                    count++;
+                else
+                    break;
             }
 
-            return CheckDirection(0, 1)   // горизонталь
-                || CheckDirection(1, 0)   // вертикаль
-                || CheckDirection(1, 1)   // диагональ \
-                || CheckDirection(1, -1); // диагональ /
+            for (int i = 1; i < inRow; i++)
+            {
+                int r = row - dr * i;
+                int c = col - dc * i;
+
+                if (r < 0 || r >= n || c < 0 || c >= n)
+                    break;
+
+                if (game.Board[r][c] == player)
+                    count++;
+                else
+                    break;
+            }
+
+            return count >= inRow;
         }
     }
 }

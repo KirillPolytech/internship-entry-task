@@ -11,6 +11,8 @@ namespace tic_tac_toe.Models
         public int FieldSize { get; set; }
         public int WinCondition { get; set; }
 
+        public Dictionary<string, MoveResult> MoveHistory { get; set; } = new();
+
         public GameData(int fieldSize, int winCondition)
         {
             FieldSize = fieldSize;

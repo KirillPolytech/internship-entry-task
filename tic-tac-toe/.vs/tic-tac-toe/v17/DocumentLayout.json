@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|f:\\unity\\internship-entry-task\\tic-tac-toe\\services\\gameservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|solutionrelative:services\\gameservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|f:\\unity\\internship-entry-task\\tic-tac-toe\\controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|solutionrelative:controllers\\gamecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|f:\\unity\\internship-entry-task\\tic-tac-toe\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|f:\\unity\\internship-entry-task\\tic-tac-toe\\tic-tac-toe.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|solutionrelative:tic-tac-toe.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|f:\\unity\\internship-entry-task\\tic-tac-toe\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{5A57AD68-DE06-4544-980E-FC015DEEEEAD}|tic-tac-toe.csproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,57 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "tic-tac-toe",
-              "DocumentMoniker": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\tic-tac-toe.csproj",
-              "RelativeDocumentMoniker": "tic-tac-toe.csproj",
-              "ToolTip": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\tic-tac-toe.csproj",
-              "RelativeToolTip": "tic-tac-toe.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-07-19T14:20:27.333Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GameController.cs",
-              "DocumentMoniker": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\Controllers\\GameController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GameController.cs",
-              "ToolTip": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\Controllers\\GameController.cs",
-              "RelativeToolTip": "Controllers\\GameController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAlwB0AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T14:15:50.331Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "GameService.cs",
-              "DocumentMoniker": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\Services\\GameService.cs",
-              "RelativeDocumentMoniker": "Services\\GameService.cs",
-              "ToolTip": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\Services\\GameService.cs",
-              "RelativeToolTip": "Services\\GameService.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAcwGQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T14:15:50.337Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAACIAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-19T10:37:32.098Z",
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "F:\\Unity\\internship-entry-task\\tic-tac-toe\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-07-20T21:04:40.443Z",
               "EditorCaption": ""
             }
           ]

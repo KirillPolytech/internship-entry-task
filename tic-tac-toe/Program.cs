@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using tic_tac_toe.Configuration;
+using tic_tac_toe.Interfaces;
 using tic_tac_toe.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,32 +16,23 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Конфигурация из переменных окружения
+// Configuration from environment variables
 builder.Configuration.AddEnvironmentVariables();
 
-// Настройки игры из env
+// Game settings from env
 builder.Services.Configure<GameSettings>(builder.Configuration.GetSection("GameSettings"));
 
-// Регистрируем MongoDB репозиторий и сервис
-builder.Services.AddSingleton<GameRepository>();
-builder.Services.AddSingleton<GameService>();
+// Registering services
+builder.Services.AddScoped<GameService>();
+builder.Services.AddScoped<IGameRepository, JsonGameRepositoryService>();
 
-// Конфигурация Kestrel на порт 8080
-builder.WebHost.ConfigureKestrel(options =>
-{
-    options.ListenAnyIP(8080);
-});
 
-// Автоматическая валидация с RFC7807 для некорректного JSON
+// Automatic validation with RFC7807 for incorrect JSON
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.InvalidModelStateResponseFactory = context =>
@@ -59,7 +51,21 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
     };
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .ConfigureApiBehaviorOptions(options =>
+    {
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            var problemDetails = new ValidationProblemDetails(context.ModelState)
+            {
+                Status = StatusCodes.Status400BadRequest,
+                Type = "https://tools.ietf.org/html/rfc7807",
+                Title = "Invalid JSON request"
+            };
+            return new BadRequestObjectResult(problemDetails);
+        };
+    });
+
 
 var app = builder.Build();
 

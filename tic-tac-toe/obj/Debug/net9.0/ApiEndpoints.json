@@ -2,7 +2,7 @@
   {
     "ContainingType": "tic_tac_toe.Controllers.GameController",
     "Method": "GetGameState",
-    "RelativePath": "Game/{gameId}",
+    "RelativePath": "Game/{gameId}/GetGameState",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -18,7 +18,7 @@
   {
     "ContainingType": "tic_tac_toe.Controllers.GameController",
     "Method": "MakeMove",
-    "RelativePath": "Game/{gameId}/move",
+    "RelativePath": "Game/{gameId}/MakeMove",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -31,6 +31,22 @@
       {
         "Name": "move",
         "Type": "tic_tac_toe.Models.MoveRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "tic_tac_toe.Controllers.GameController",
+    "Method": "GetGame",
+    "RelativePath": "Game/{id}/GetGame",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

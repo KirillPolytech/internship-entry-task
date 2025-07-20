@@ -8,10 +8,13 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 COPY ["tic-tac-toe.csproj", "./"]
-RUN dotnet restore "./tic-tac-toe.csproj"
+COPY ["TicTacToe.Tests.Unit/TicTacToe.Tests.Unit.csproj", "TicTacToe.Tests.Unit/"]
+
+RUN dotnet restore "tic-tac-toe.csproj"
 
 COPY . ./
-RUN dotnet build "tic-tac-toe.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+RUN dotnet build "tic-tac-toe.csproj" -c Release -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release

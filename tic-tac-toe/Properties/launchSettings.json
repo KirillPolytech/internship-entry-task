@@ -7,16 +7,14 @@
         "GameSettings__FieldSize": "3",
         "GameSettings__WinCondition": "3"
       },
-      "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:8080"
+      "dotnetRunMessages": true
     },
     "https": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:8081;http://localhost:8080"
+      "dotnetRunMessages": true
     },
     "Container (Dockerfile)": {
       "commandName": "Docker",

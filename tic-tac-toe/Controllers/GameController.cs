@@ -19,32 +19,67 @@ namespace tic_tac_toe.Controllers
         [HttpPost("CreateGame")]
         public IActionResult CreateGame()
         {
-            var game = _gameService.CreateGame();
-            Games[game.Id] = game;
-            return Ok(new { gameId = game.Id });
+            GameData game = _gameService.CreateGame();
+            return CreatedAtAction(nameof(GetGame), new { id = game.Id }, game);
         }
 
-        [HttpPost("{gameId}/move")]
+        [HttpGet("{id}/GetGame")]
+        public IActionResult GetGame(string id)
+        {
+            GameData game = _gameService.GetGame(id);
+
+            return game == null ? NotFound() : Ok(game);
+        }
+
+        [HttpPost("{gameId}/MakeMove")]
         public IActionResult MakeMove(Guid gameId, [FromBody] MoveRequest move)
         {
-            if (!Games.TryGetValue(gameId, out var game))
-                return NotFound("Game not found");
-
-            bool success =  _gameService.MakeMove(game, move.Row, move.Col);
-
-            if (!success)
-                return BadRequest("Invalid move or game finished");
-
-            return Ok(new
+            if (!ModelState.IsValid)
             {
-                game.Status,
-                game.Winner,
+                return ValidationProblem(new ValidationProblemDetails(ModelState)
+                {
+                    Status = 400,
+                    Type = "https://tools.ietf.org/html/rfc7807",
+                    Title = "Invalid JSON request"
+                });
+            }
+
+            var game = _gameService.GetGame(gameId.ToString());
+
+            if (game == null) 
+                return NotFound();
+
+            var key = $"{move.Row}-{move.Col}-{game.CurrentPlayer}";
+
+            if (game.MoveHistory.TryGetValue(key, out var cachedResult))
+            {
+                Response.Headers["ETag"] = cachedResult.ETag;
+                return Ok(cachedResult.Response);
+            }
+
+            bool success = _gameService.MakeMove(game, move.Row, move.Col);
+
+            var response = new MoveResponse
+            {
+                Success = success,
                 CurrentPlayer = game.CurrentPlayer,
-                Board = game.Board
-            });
+                Board = game.Board                
+            };
+
+            var etag = $"\"{Guid.NewGuid()}\"";
+
+            game.MoveHistory[key] = new MoveResult
+            {
+                Response = response,
+                ETag = etag
+            };
+
+            Response.Headers["ETag"] = etag;
+
+            return Ok(response);
         }
 
-        [HttpGet("{gameId}")]
+        [HttpGet("{gameId}/GetGameState")]
         public IActionResult GetGameState(Guid gameId)
         {
             if (!Games.TryGetValue(gameId, out var game))
