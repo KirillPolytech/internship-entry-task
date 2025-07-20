@@ -1,0 +1,27 @@
+{
+  "Id": "efbd8b54-9f8f-47f9-9109-6a284525dd34",
+  "Board": [
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "CurrentPlayer": 1,
+  "MoveCount": 0,
+  "Status": 0,
+  "Winner": 0,
+  "FieldSize": 3,
+  "WinCondition": 3,
+  "MoveHistory": {}
+}

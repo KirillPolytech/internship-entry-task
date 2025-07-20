@@ -169,3 +169,4 @@ F:\Unity\internship-entry-task\tic-tac-toe\bin\Debug\net9.0\TicTacToe.Tests.Unit
 F:\Unity\internship-entry-task\tic-tac-toe\bin\Debug\net9.0\TicTacToe.Tests.Unit\bin\Debug\net9.0\TicTacToe.Tests.Unit\bin\Debug\net9.0\TicTacToe.Tests.Unit\obj\TicTacToe.Tests.Unit.csproj.nuget.dgspec.json
 F:\Unity\internship-entry-task\tic-tac-toe\bin\Debug\net9.0\TicTacToe.Tests.Unit\bin\Debug\net9.0\TicTacToe.Tests.Unit\obj\Debug\net9.0\TicTacToe.Tests.Unit.sourcelink.json
 F:\Unity\internship-entry-task\tic-tac-toe\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+F:\Unity\internship-entry-task\tic-tac-toe\bin\Debug\net9.0\data\efbd8b54-9f8f-47f9-9109-6a284525dd34.json
